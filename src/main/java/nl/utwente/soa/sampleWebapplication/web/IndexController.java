@@ -14,7 +14,7 @@ public class IndexController {
     @GetMapping("/")
     public String showWeather(Model model) {
 
-        model.addAttribute("weather", weatherService.getCurrentWeatherByHand("Amsterdam,NL"));
+        model.addAttribute("weather", weatherService.getCurrentWeatherWithSpringRestTemplate("Amsterdam,NL"));
 
         return "show-weather";
     }

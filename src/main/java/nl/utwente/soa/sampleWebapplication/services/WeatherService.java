@@ -1,6 +1,7 @@
 package nl.utwente.soa.sampleWebapplication.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.utwente.soa.sampleWebapplication.domain.ForecastWeatherResult;
 import nl.utwente.soa.sampleWebapplication.domain.WeatherResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,12 +24,12 @@ public class WeatherService {
 
     // Get current weather with Spring Rest Template
     @Autowired private  RestTemplateBuilder restTemplateBuilder;
-    public WeatherResult getCurrentWeatherWithSpringRestTemplate(String city){
-        String url = host + "/data/2.5/weather?q=" + city + "&appid=" + key + "&units=metric";
+    public ForecastWeatherResult getCurrentWeatherWithSpringRestTemplate(String city){
+        String url = host + "/data/2.5/forecast?q=" + city + "&appid=" + key + "&units=metric";
 
         RestTemplate restTemplate = restTemplateBuilder.build();
-        WeatherResult weatherResult = restTemplate.getForObject(url, WeatherResult.class);
-        return weatherResult;
+        ForecastWeatherResult forecastWeatherResult = restTemplate.getForObject(url, ForecastWeatherResult.class);
+        return forecastWeatherResult;
     }
 
 
@@ -36,7 +37,7 @@ public class WeatherService {
     @Autowired
     private ObjectMapper jacksonObjectMapper;
     public WeatherResult getCurrentWeatherByHand(String city){
-        String urlString = host + "/data/2.5/weather?q=" + city + "&appid=" + key + "&units=metric";
+        String urlString = host + "/data/2.5/forecast?q=" + city + "&appid=" + key + "&units=metric";
 
         // Manual HTTP GET request
         StringBuffer content = new StringBuffer();

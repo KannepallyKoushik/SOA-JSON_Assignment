@@ -4,21 +4,22 @@
 <body>
     <div class="container">
         <img src="Afbeelding1-1.jpg" style="width:100%" />
-        <h2>Weather in <span th:text="${weather.city}"></span></h2>
+        <h2>Weather in <span th:text="${weather.city.city}"></span></h2>
         <table class="table">
-            <tbody>
+            <tbody >
             <tr>
+                <th>Date and Time of Recording</th>
                 <th>Temperature</th>
-                <td th:text="${weather.main.temp}"></td>
+                <th>Weather</th>
             </tr>
-            <tr>
-                <th>weather</th>
-                <td>
-                    <ul>
-                        <li th:each="item : ${weather.weather}"><span th:text="${item.description}"></span></li>
-                     </ul>
+            <tr th:each="item : ${weather.list}">
+                <td th:text="${item.dt_txt}"></td>
+                <td th:text="${item.main.temp}"></td>
+                <td th:each="witem : ${item.weather}">
+                    <p th:text="${witem.description}"></p>
                 </td>
             </tr>
+
             </tbody>
         </table>
     </div>
